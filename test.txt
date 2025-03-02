@@ -1,0 +1,14 @@
+# Set database connection strings 
+netlify env:set DATABASE_URL "sqlserver://myportfolio-sqlsrv.database.windows.net:1433;database=portfolio-db;user=parth;password=TempPassword123;encrypt=true"
+
+netlify env:set SHADOW_DATABASE_URL "sqlserver://myportfolio-sqlsrv.database.windows.net:1433;database=portfolio-shadow;user=parth;password=TempPassword123;encrypt=true"
+
+# Set authentication secrets
+netlify env:set JWT_SECRET "db808d94cb6cbc5ee71749e52a8e0f2c3a1b246fad37474e99bb1ebcba544463"
+
+# Set email configuration
+netlify env:set EMAIL_USER "parthsoni08072000@gmail.com"
+netlify env:set EMAIL_PASS "imor bcam fzuc fhpw"
+
+# Set node environment
+netlify env:set NODE_ENV "production"

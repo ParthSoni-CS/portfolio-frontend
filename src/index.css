@@ -1,0 +1,296 @@
+@import "tailwindcss";
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Space Grotesk", sans-serif;
+  background: #ffffff;   /* white background */
+  color: #1f2937;        /* dark gray text */
+}
+
+@layer utilities {
+  @keyframes blink {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0;
+    }
+  }
+
+  .animate-blink {
+    animation: blink 0.8s step-end infinite;
+  }
+
+  @keyframes loading {
+    0% {
+      transform: translateX(-100%);
+    }
+    100% {
+      transform: translateX(250%);
+    }
+  }
+
+  .animate-loading-bar {
+    animation: loading 0.8s ease infinite;
+  }
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Ensure navbar stays on top */
+nav.fixed {
+  z-index: 40 !important; /* Higher z-index than copy buttons */
+}
+
+/* Notebook Content Styling */
+.notebook-content {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  color: #333;
+  overflow-x: auto;
+}
+
+/* Table wrapper for horizontal scrolling */
+.table-wrapper {
+  overflow-x: auto;
+  width: 100%;
+  margin-bottom: 1rem;
+  display: block;
+  -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+}
+
+/* Table styling within scrollable wrapper */
+.table-wrapper table {
+  width: auto !important;  /* Let the content determine width */
+  max-width: none !important;
+  margin: 0 !important; /* Remove margin within wrapper */
+  table-layout: auto !important;
+  border-collapse: separate !important; /* Better for scrolling */
+  border-spacing: 0 !important;
+}
+
+/* Ensure notebook content tables don't break layout */
+.notebook-content table {
+  border-collapse: collapse;
+  margin: 1rem 0;
+  width: 100%;
+}
+
+.notebook-content th,
+.notebook-content td {
+  border: 1px solid #e2e8f0;
+  padding: 0.5rem;
+  white-space: normal;
+  word-break: normal;
+  min-width: 100px; /* Prevent extremely narrow columns */
+}
+
+.notebook-content th {
+  background-color: #f7fafc;
+}
+
+.notebook-content pre {
+  position: relative !important;
+  margin: 1rem 0 !important;
+  padding: 1rem !important;
+  background-color: #f7fafc;
+  border-radius: 0.375rem;
+  overflow-x: auto;
+  padding-right: 70px !important; /* Make room for the copy button */
+  scroll-margin-top: 6rem !important; /* Prevents code blocks from being too close to navbar when scrolled to */
+}
+
+.notebook-content .input, 
+.notebook-content .output {
+  margin-bottom: 1rem;
+}
+
+.notebook-content img {
+  max-width: 100%;
+  height: auto;
+  margin: 1rem auto;
+  display: block;
+}
+
+/* Headings Styling with Scroll Margin */
+.notebook-content h1,
+.notebook-content h2,
+.notebook-content h3,
+.notebook-content h4,
+.notebook-content h5,
+.notebook-content h6 {
+  scroll-margin-top: 5rem;
+  position: relative;
+}
+
+/* For mobile devices */
+@media (max-width: 768px) {
+  .notebook-content h1,
+  .notebook-content h2,
+  .notebook-content h3,
+  .notebook-content h4,
+  .notebook-content h5,
+  .notebook-content h6 {
+    scroll-margin-top: 4rem;
+  }
+}
+
+/* Table of Contents styling */
+.toc ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+/* Indent based on heading level */
+.toc li {
+  margin-bottom: 0.35rem;
+}
+
+.toc li.ml-2 {
+  margin-left: 0.5rem;
+}
+
+.toc li.ml-4 {
+  margin-left: 1rem;
+}
+
+.toc li.ml-6 {
+  margin-left: 1.5rem;
+}
+
+.toc li.ml-9 {
+  margin-left: 2.25rem;
+}
+
+.toc li.ml-12 {
+  margin-left: 3rem;
+}
+
+/* Copy Code Button Styling - Updated to prevent navbar overflow */
+.copy-code-button {
+  position: absolute !important;
+  top: 8px !important;
+  right: 8px !important;
+  padding: 4px 8px !important;
+  background-color: white !important;
+  border: 1px solid #e2e8f0 !important;
+  border-radius: 4px !important;
+  cursor: pointer !important;
+  z-index: 20 !important; /* Lower z-index than navbar */
+  opacity: 1 !important; /* Always visible */
+  display: flex !important;
+  align-items: center !important;
+  gap: 4px !important;
+  color: #4b5563 !important;
+  font-size: 0.75rem !important;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05) !important;
+}
+
+/* Enhance hover state */
+.copy-code-button:hover {
+  background-color: #f0f9ff !important; /* Light blue background on hover */
+  color: #3b82f6 !important;
+  border-color: #93c5fd !important;
+}
+
+/* Add active state for better feedback */
+.copy-code-button:active {
+  background-color: #dbeafe !important;
+  transform: translateY(1px) !important;
+}
+
+/* Add styles for "Copied!" state */
+.copy-code-button span {
+  font-weight: 500 !important;
+}
+
+/* Make sure all code blocks in Jupyter notebooks have proper positioning */
+.notebook-content pre,
+.notebook-content div.highlight,
+.jp-CodeCell,
+.input_area,
+.cell-output-stdout,
+.cell-output {
+  position: relative !important;
+}
+
+/* Style for Jupyter notebook specific code cells */
+.jp-CodeCell .jp-Cell-inputArea,
+.jp-NotebookCell-inputWrapper,
+.jp-InputArea-editor {
+  position: relative !important;
+}
+
+/* Fix potential overflow issues */
+.notebook-content .highlight {
+  position: relative !important;
+  overflow-x: auto !important;
+}
+
+/* LaTeX and KaTeX Styling */
+.math.display,
+.katex-display {
+  overflow-x: auto;
+  overflow-y: hidden;
+  margin: 1rem 0;
+  padding: 0.5rem 0;
+  text-align: center;
+}
+
+/* Add some padding to inline math */
+.math:not(.display),
+.katex {
+  padding: 0 2px;
+}
+
+/* Make sure KaTeX font sizes are consistent */
+.katex {
+  font-size: 1.1em;
+}
+
+/* Ensure KaTeX containers don't overflow */
+.katex-display > .katex {
+  max-width: 100%;
+}
+
+/* Style for active TOC items */
+.toc button.active,
+.toc button.text-blue-500 {
+  color: #3b82f6;
+  font-weight: bold;
+}
+
+
+/* Add these lines to your existing CSS if needed */
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale(1.2);
+  }
+}
