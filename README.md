@@ -1,4 +1,4 @@
-# Portfolio Website Frontend [LINK][https://parth-soni.netlify.app/]
+# Portfolio Website Frontend [LINK](https://parth-soni.netlify.app/)
 
 This repository contains the frontend code for Parth Soni's portfolio website. The site showcases data science projects, professional information, and interactive case studies with Jupyter notebook visualization support.
 
